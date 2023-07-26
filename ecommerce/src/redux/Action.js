@@ -1,2 +1,3 @@
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_CATEGORIES = 'GET_CATEGORIS';
+export const GET_JEWELERY = 'GET_JEWELERY';

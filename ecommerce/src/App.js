@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import Header from './components/navbar/Header';
 import AboutUs from './pages/AboutUs';
 import { store } from './store/store';
+import CategoryDetails from './pages/CategoryDetails';
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/about' element={<AboutUs/>}/>
+        <Route path="/category/:item" component={CategoryDetails} />
       </Routes>
-     {/* <Dashboard /> */}
-     {/* <Calculator /> */}
+    
     </BrowserRouter>
     </Provider>
   );
