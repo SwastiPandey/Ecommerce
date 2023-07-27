@@ -1,17 +1,16 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import { useLocation, useParams } from "react-router-dom";
 
-const CategoryDetails = () => {
-  const {item} = useParams();
+const CategoryDetails = ({ route, navigation }) => {
+  const { state } = useLocation();
+  // const { id, color } = state;
+  console.log("item=======>>", state);
 
-  console.log(
-    'item=======>>', item
-  )
-  
   return (
-    <div> category  {decodeURIComponent(item)}</div>
-  )
-}
+    <div>
+      <p>hello 7</p>
+    </div>
+  );
+};
 
-export default CategoryDetails
+export default CategoryDetails;
