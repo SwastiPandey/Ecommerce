@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_CATEGORIES, GET_JEWELERY, GET_PRODUCTS } from "../redux/Action";
+import { GET_CATEGORIES, GET_CATEGORY_DETAILS, GET_PRODUCTS } from "../redux/Action";
 import { useNavigate } from "react-router-dom";
 //import { useNavigation } from 'react-router-dom';
 
@@ -20,20 +20,21 @@ const Home = () => {
   useEffect(() => {
     dispatch({ type: GET_PRODUCTS });
     dispatch({ type: GET_CATEGORIES });
-    dispatch({ type: GET_JEWELERY });
+    dispatch({ type: GET_CATEGORY_DETAILS });
   }, []);
 
   const handleNavigation = (item) => {
     navigate("/category", { state: item });
   };
 
+  const handleProductDetails = (id) => {
+    console.log('id====>>', id)
+    navigate("/productDetails", { state: { itemId: id } });
+  }
+
   return (
     <>
-      {/* <Row>{jeweleryData && jeweleryData.map((item, index) => {
-        return (
-          <div>{item.title}</div>
-        )
-      })}</Row> */}
+
       <div>
         <test>Hello</test>
       </div>
@@ -51,6 +52,7 @@ const Home = () => {
                     marginBottom: "10px",
                   }}
                   onClick={() => handleNavigation(item)}
+
                 >
                   <strong>{item}</strong>
                 </div>
@@ -62,15 +64,18 @@ const Home = () => {
         {productData &&
           productData.map((item, index) => {
             return (
+
               <Col>
                 {/* <Row> */}
-                <Col sm={6} lg={4}>
+                <Col key={index} sm={6} md={4} lg={3} style={{ marginBottom: '10px' }}>
+                  <div style={{ maxWidth: '180px', margin: '171px', display: 'flex', justifyContent: 'center' }}>
+                  </div>
                   {/* <Card style={{ width: '18rem' }}>
       <Card.Body> */}
                   <Image
                     src={item.image}
                     rounded
-                    style={{ width: "400px", height: "500px" }}
+                    style={{ width: "171px", height: "180px" }}
                   />
                   <Card.Title>
                     {item.id}-{item.title}
@@ -89,6 +94,7 @@ const Home = () => {
                     <strong>Description:</strong> {item.description}
                   </Card.Text>
                   <Button variant="primary">Add to cart</Button>
+                  <Button variant="secondary" onClick={() => handleProductDetails(item.id)}>View Details</Button>
                   {/*         
       </Card.Body>
     </Card> */}
@@ -96,6 +102,7 @@ const Home = () => {
 
                 {/* </Row> */}
               </Col>
+
             );
           })}
       </Row>

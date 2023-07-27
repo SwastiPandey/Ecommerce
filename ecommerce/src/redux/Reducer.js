@@ -7,8 +7,11 @@ const initialState = {
     categoryData: [],
     isCategoryFetching: false,
     error: '' ,
-    jeweleryData: [],
+    categoryDetailsData: [],
     isJeweleryFetching: false,
+    error: '',
+    ProductDetails: {},
+    isProductDetailsFetching: false,
     error: ''
 
 }
@@ -48,13 +51,25 @@ const productSlice = createSlice({
         },
         fetchJewelerySuccess(state, { payload }) {
             state.isJeweleryFetching = false;
-            state.jeweleryData = payload;
+            state.categoryDetailsData = payload;
         },
         fetchJeweleryFail(state) {
             state.isJeweleryFetching = false;
             state.error = 'Something went wrong!'
-        }
+        },
+        fetchProductDetailsStarted(state) {
+            state.isProductDetailsFetching = true;
 
+        },
+        fetchProductDetailsSuccess(state, { payload }) {
+            state.isProductDetailsFetching = false;
+            state.ProductDetailsData =payload;
+        },
+        fetchProductDetailsFail(state){
+            state.isProductDetailsFetching = false;
+            state.error = 'Something went wrong!'
+        }
+ 
     }
 
 })
@@ -70,7 +85,12 @@ export const {
     fetchCategoryFail,
     fetchJeweleryStarted,
     fetchJewelerySuccess,
-    fetchJeweleryFail
+    fetchJeweleryFail,
+    fetchProductDetailsStarted,
+    fetchProductDetailsSuccess,
+    fetchProductDetailsFail
+
+
 
 } = actions;
 export default reducer;
