@@ -12,7 +12,8 @@ const initialState = {
     error: '',
     ProductDetails: {},
     isProductDetailsFetching: false,
-    error: ''
+    error: '',
+    cart: []
 
 }
 
@@ -63,12 +64,21 @@ const productSlice = createSlice({
         },
         fetchProductDetailsSuccess(state, { payload }) {
             state.isProductDetailsFetching = false;
-            state.ProductDetailsData =payload;
+            state.ProductDetails =payload;
         },
         fetchProductDetailsFail(state){
             state.isProductDetailsFetching = false;
             state.error = 'Something went wrong!'
-        }
+        },
+        addToCart(state,{payload}){
+            console.log('action.payload', payload)
+            state.cart = [...state.cart, payload.cartItems];
+            console.log('state.cart', state.cart)
+        },
+        
+        removeFromCart(state, { payload }) {
+                state.cart = state.cart.filter(item => item.id !== payload.itemId);
+      }
  
     }
 
@@ -88,9 +98,11 @@ export const {
     fetchJeweleryFail,
     fetchProductDetailsStarted,
     fetchProductDetailsSuccess,
-    fetchProductDetailsFail
-
-
+    fetchProductDetailsFail,
+    addToCart,
+    removeFromCart
 
 } = actions;
+
+
 export default reducer;

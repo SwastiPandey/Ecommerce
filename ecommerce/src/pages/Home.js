@@ -8,15 +8,18 @@ import Row from "react-bootstrap/Row";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_CATEGORIES, GET_CATEGORY_DETAILS, GET_PRODUCTS } from "../redux/Action";
 import { useNavigate } from "react-router-dom";
+import { addToCart } from "../redux/Reducer";
+import { removeFromCart } from '../redux/Action';
 //import { useNavigation } from 'react-router-dom';
 
 const Home = () => {
   // const [posts, setPost] = useState()
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { productData, categoryData, jeweleryData } = useSelector(
+  const { productData, categoryData, jeweleryData , cart} = useSelector(
     ({ product }) => product
   );
+  console.log('cart', cart)
   useEffect(() => {
     dispatch({ type: GET_PRODUCTS });
     dispatch({ type: GET_CATEGORIES });
@@ -30,6 +33,17 @@ const Home = () => {
   const handleProductDetails = (id) => {
     console.log('id====>>', id)
     navigate("/productDetails", { state: { itemId: id } });
+  }
+
+
+  const _handleAddToCart = (item) => {
+    console.log('item', item)
+    dispatch(addToCart({cartItems: item}))
+  }
+   
+  const handleRemoveFromCart = (id) => {
+    dispatch(removeFromCart({ itemId: id }));
+    
   }
 
   return (
@@ -93,8 +107,9 @@ const Home = () => {
                   <Card.Text>
                     <strong>Description:</strong> {item.description}
                   </Card.Text>
-                  <Button variant="primary">Add to cart</Button>
+                  <Button variant="primary " onClick={() => _handleAddToCart(item)}>Add to cart</Button>
                   <Button variant="secondary" onClick={() => handleProductDetails(item.id)}>View Details</Button>
+                  <Button variant="danger" onClick={() => handleRemoveFromCart(item.id)}>Remove From Cart</Button>
                   {/*         
       </Card.Body>
     </Card> */}

@@ -9,14 +9,16 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Header from "./components/navbar/Header";
 import AboutUs from "./pages/AboutUs";
-import { store } from "./store/store";
+import { persistor, store } from "./store/store";
 import CategoryDetails from "./pages/CategoryDetails";
 import { ProductDetails } from "./pages/ProductDetails";
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 function App() {
   return (
     <Provider store={store}>
+       <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter className="App">
         <Header />
         <Routes>
@@ -27,6 +29,7 @@ function App() {
           <Route path= "/productDetails" element={<ProductDetails />} />
         </Routes>
       </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 }

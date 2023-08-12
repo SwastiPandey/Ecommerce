@@ -17,7 +17,7 @@ function multiply(a,b){
 }
 console.log(multiply(5,6))
 
-//Arror function
+//Arrow function
 
 const ShowName=(name)=>name;
 

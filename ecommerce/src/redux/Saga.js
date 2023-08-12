@@ -54,17 +54,17 @@ export function* getCategoryDetailsSaga(action) {
     yield put(fetchJeweleryFail());
   }
 }
-export function* getProductDetailsSaga(action){
+export function* getProductDetailsSaga(action) {
   try {
     const payload = action.payload
-    yield put (fetchProductDetailsStarted());
-    console.log('started')
-     
-    const { data } = yield call(apiClient.get, `${PRODUCTDETAILS}${payload.itemId}`);
-    console.log ('Sucess', data)
-    yield put (fetchProductDetailsSuccess(data));
+    yield put(fetchProductDetailsStarted());
+    console.log('started', payload)
+
+    const { data } = yield call(apiClient.get,`${PRODUCTDETAILS}${payload.itemId}`);
+    console.log('Sucess', apiClient.get,`${PRODUCTDETAILS}${payload.itemId}`)
+    yield put(fetchProductDetailsSuccess(data));
   } catch (err) {
-    console.log ('Fail')
-    yield put (fetchProductDetailsFail());
+    console.log('Fail')
+    yield put(fetchProductDetailsFail());
   }
 }
